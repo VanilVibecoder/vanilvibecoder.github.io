@@ -1,0 +1,25 @@
+{
+  "id": "private-instance-workflow-id",
+  "name": "Unsafe export",
+  "active": true,
+  "pinData": {
+    "Webhook": [{ "json": { "email": "client@example.com" } }]
+  },
+  "nodes": [
+    {
+      "name": "Send Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "credentials": {
+        "telegramApi": {
+          "id": "private-credential-id",
+          "name": "Production bot"
+        }
+      },
+      "parameters": {
+        "chatId": "123456789",
+        "token": "123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef"
+      }
+    }
+  ],
+  "connections": {}
+}

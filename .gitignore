@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.cache/
+coverage/
+playwright-report/
+test-results/
+.lighthouseci/
+.env
+.env.*
+!.env.example
+output/playwright/
+
+.codex-dev.*.log

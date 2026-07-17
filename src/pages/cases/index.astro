@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import CaseCard from '../../components/CaseCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const cases = (await getCollection('cases', ({ data }) => data.locale === 'ru')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="Кейсы AI-автоматизаций — VANIL / Иван Новичков"
+  description="Открытые кейсы n8n и AI: архитектура, тесты, ограничения, GitHub-репозитории и безопасные workflow-экспорты."
+>
+  <section class="section cases-hero">
+    <div class="container cases-hero__grid">
+      <div>
+        <p class="eyebrow">Портфолио</p>
+        <h1 class="display">Кейсы без скрытой магии.</h1>
+      </div>
+      <p class="lede">
+        У каждого проекта есть статус, архитектура, проверенные сценарии и ограничения. Можно
+        открыть репозиторий и увидеть, как принято решение — а не только финальный скриншот.
+      </p>
+    </div>
+  </section>
+  <section class="section--tight">
+    <div class="container case-grid">
+      {cases.map((entry, index) => <CaseCard entry={entry} index={index} />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cases-hero {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cases-hero__grid,
+  .case-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .cases-hero__grid {
+    align-items: end;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .cases-hero__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .case-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

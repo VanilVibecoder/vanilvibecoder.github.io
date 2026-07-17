@@ -1,0 +1,43 @@
+---
+type Status = 'demo' | 'training' | 'public-template';
+
+const labels: Record<Status, string> = {
+  demo: 'Демонстрационный MVP',
+  training: 'Учебный кейс',
+  'public-template': 'Публичный шаблон',
+};
+
+const { status } = Astro.props as { status: Status };
+---
+
+<span class:list={['status', `status--${status}`]}>{labels[status]}</span>
+
+<style>
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--ink-soft);
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .status::before {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--coral);
+    content: '';
+  }
+
+  .status--training::before {
+    background: #d89c2b;
+  }
+
+  .status--public-template::before {
+    background: #4f8e71;
+  }
+</style>

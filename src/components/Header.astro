@@ -1,0 +1,64 @@
+---
+import Brand from './Brand.astro';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <Brand compact />
+    <nav aria-label="Основная навигация">
+      <a href="/#work">Что автоматизирую</a>
+      <a href="/cases/">Кейсы</a>
+      <a href="/#process">Подход</a>
+      <a class="site-header__contact" href="https://t.me/novichkov_ivan">Написать</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header__inner {
+    display: flex;
+    min-height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.7rem, 2vw, 1.5rem);
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  nav a {
+    text-decoration: none;
+  }
+
+  nav a:not(.site-header__contact) {
+    display: none;
+  }
+
+  .site-header__contact {
+    padding: 0.55rem 0.85rem;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+  }
+
+  .site-header__contact:hover {
+    background: var(--ink);
+    color: white;
+  }
+
+  @media (min-width: 48rem) {
+    nav a:not(.site-header__contact) {
+      display: inline;
+    }
+  }
+</style>
