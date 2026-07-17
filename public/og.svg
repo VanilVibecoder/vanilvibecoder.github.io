@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f6f2ea"/>
+  <path d="M0 0h34v630H0z" fill="#e85d4a"/>
+  <g fill="none" stroke="#c7c0b5" stroke-width="2">
+    <path d="M730 136h150v76h130v76h120"/>
+    <path d="M730 372h170v82h230"/>
+  </g>
+  <g fill="#151a20">
+    <rect x="700" y="104" width="170" height="64" rx="16"/>
+    <rect x="850" y="180" width="180" height="64" rx="16"/>
+    <rect x="1000" y="256" width="150" height="64" rx="16"/>
+    <rect x="700" y="340" width="190" height="64" rx="16"/>
+    <rect x="870" y="422" width="210" height="64" rx="16"/>
+  </g>
+  <text x="92" y="155" fill="#e85d4a" font-family="Arial, sans-serif" font-size="34" font-weight="700">VANIL / ИВАН НОВИЧКОВ</text>
+  <text x="92" y="255" fill="#151a20" font-family="Arial, sans-serif" font-size="64" font-weight="700">AI-автоматизация</text>
+  <text x="92" y="330" fill="#151a20" font-family="Arial, sans-serif" font-size="64" font-weight="700">бизнес-процессов</text>
+  <text x="92" y="418" fill="#5d6670" font-family="Arial, sans-serif" font-size="30">n8n · AI · PostgreSQL · Qdrant · API</text>
+</svg>
