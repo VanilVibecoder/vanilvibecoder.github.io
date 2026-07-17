@@ -12,3 +12,4 @@ test-results/
 output/playwright/
 
 .codex-dev.*.log
+.playwright-cli/
