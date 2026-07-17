@@ -1,0 +1,97 @@
+---
+import Brand from './Brand.astro';
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__top">
+    <div>
+      <p class="eyebrow">Контакт</p>
+      <h2>Есть процесс, который<br />повторяется каждую неделю?</h2>
+    </div>
+    <div class="site-footer__action">
+      <p>
+        Опишите его одним сообщением. Я скажу, что имеет смысл автоматизировать и где AI будет
+        лишним.
+      </p>
+      <div class="button-row">
+        <a class="button button--primary" href="https://t.me/novichkov_ivan">Telegram</a>
+        <a class="button button--light" href="mailto:ewan.novichkov@yandex.ru">Email</a>
+      </div>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <Brand />
+    <div class="site-footer__links">
+      <a href="https://github.com/VanilVibecoder" rel="me">GitHub</a>
+      <span>© {new Date().getFullYear()}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(4rem, 8vw, 7rem) 2rem;
+    background: var(--panel);
+    color: white;
+  }
+
+  .site-footer .eyebrow {
+    color: #ff9b8e;
+  }
+
+  .site-footer :global(.brand__mark) {
+    color: #ff9b8e;
+  }
+
+  .site-footer :global(.brand__name) {
+    color: rgb(255 255 255 / 62%);
+  }
+
+  .site-footer__top {
+    display: grid;
+    gap: 2.5rem;
+    padding-bottom: 4rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 4.8rem);
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+  }
+
+  .site-footer__action {
+    align-self: end;
+  }
+
+  .site-footer__action p {
+    max-width: 33rem;
+    margin: 0;
+    color: rgb(255 255 255 / 67%);
+    font-size: 1.08rem;
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(255 255 255 / 16%);
+  }
+
+  .site-footer__links {
+    display: flex;
+    gap: 1.5rem;
+    color: rgb(255 255 255 / 60%);
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.78rem;
+  }
+
+  @media (min-width: 52rem) {
+    .site-footer__top {
+      grid-template-columns: 1.3fr 0.7fr;
+    }
+  }
+</style>

@@ -1,0 +1,117 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+  entry: CollectionEntry<'cases'>;
+  index: number;
+}
+
+const { entry, index } = Astro.props;
+const { data } = entry;
+---
+
+<article class="case-card">
+  <div class="case-card__meta">
+    <span class="case-card__number">{String(index + 1).padStart(2, '0')}</span>
+    <StatusBadge status={data.status} />
+  </div>
+  <p class="case-card__eyebrow">{data.eyebrow}</p>
+  <h2><a href={`/cases/${data.slug}/`}>{data.title}</a></h2>
+  <p class="case-card__summary">{data.summary}</p>
+  <ul class="case-card__stack" aria-label="Технологии">
+    {data.stack.slice(0, 4).map((item) => <li>{item}</li>)}
+  </ul>
+  <a
+    class="case-card__link"
+    href={`/cases/${data.slug}/`}
+    aria-label={`Открыть кейс: ${data.title}`}
+  >
+    Разобрать кейс <span aria-hidden="true">↗</span>
+  </a>
+</article>
+
+<style>
+  .case-card {
+    display: flex;
+    min-height: 31rem;
+    flex-direction: column;
+    padding: clamp(1.3rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgb(255 255 255 / 36%);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .case-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
+  .case-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .case-card__number {
+    color: var(--coral);
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.75rem;
+  }
+
+  .case-card__eyebrow {
+    margin: 4rem 0 0.75rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+  }
+
+  h2 a {
+    text-decoration: none;
+  }
+
+  .case-card__summary {
+    color: var(--ink-soft);
+  }
+
+  .case-card__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: auto 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case-card__stack li {
+    padding: 0.35rem 0.55rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.66rem;
+  }
+
+  .case-card__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>

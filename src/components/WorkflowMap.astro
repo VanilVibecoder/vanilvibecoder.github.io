@@ -1,0 +1,94 @@
+---
+interface Props {
+  steps: string[];
+  label?: string;
+}
+
+const { steps, label = 'Схема workflow' } = Astro.props;
+---
+
+<div class="workflow-map" role="img" aria-label={`${label}: ${steps.join(', ')}`}>
+  <div class="workflow-map__bar">
+    <span>workflow.map</span>
+    <span class="workflow-map__status">tested path</span>
+  </div>
+  <ol>
+    {
+      steps.map((step, index) => (
+        <li>
+          <span class="workflow-map__index">{String(index + 1).padStart(2, '0')}</span>
+          <span>{step}</span>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .workflow-map {
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: var(--radius);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+    color: white;
+  }
+
+  .workflow-map__bar {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-inline: 1rem;
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    color: rgb(255 255 255 / 55%);
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.72rem;
+  }
+
+  .workflow-map__status {
+    color: var(--lime);
+  }
+
+  ol {
+    display: grid;
+    margin: 0;
+    padding: 1rem;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 3.5rem;
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
+  }
+
+  li:last-child {
+    border-bottom: 0;
+  }
+
+  .workflow-map__index {
+    color: #ff9b8e;
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.7rem;
+  }
+
+  @media (min-width: 40rem) {
+    ol {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.7rem;
+    }
+
+    li {
+      border: 1px solid rgb(255 255 255 / 9%);
+      border-radius: 0.8rem;
+      background: var(--panel-soft);
+    }
+  }
+</style>

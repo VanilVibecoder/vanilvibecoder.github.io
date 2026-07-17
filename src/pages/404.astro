@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Страница не найдена — VANIL / Иван Новичков"
+  description="Такой страницы нет. Вернитесь к кейсам AI-автоматизаций VANIL / Ивана Новичкова."
+>
+  <section class="section error-page">
+    <div class="container error-page__inner">
+      <p class="eyebrow">Ошибка 404</p>
+      <h1 class="display">Этот маршрут никуда не подключён.</h1>
+      <p class="lede">Вернитесь к рабочей ветке: на главную или в каталог кейсов.</p>
+      <div class="button-row">
+        <a class="button button--primary" href="/">На главную</a>
+        <a class="button" href="/cases/">Кейсы</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: 65vh;
+  }
+
+  .error-page__inner {
+    display: grid;
+    min-height: 50vh;
+    align-content: center;
+  }
+</style>
