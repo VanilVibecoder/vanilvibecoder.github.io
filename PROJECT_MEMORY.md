@@ -31,7 +31,8 @@ The site is a credibility-first portfolio used in manual outreach, job applicati
 
 Core positioning:
 
-> Автоматизирую ручные бизнес-процессы с помощью n8n и AI.  
+> Автоматизирую ручные бизнес-процессы с помощью n8n и AI.
+>
 > Заявки, поддержка, документы, данные и интеграции — от разбора процесса до протестированного workflow с документацией.
 
 Primary call to action:
