@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import CaseCard from '../components/CaseCard.astro';
-import WorkflowMap from '../components/WorkflowMap.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const cases = (
@@ -56,8 +55,16 @@ const process = [
   description="Практичные автоматизации на n8n и AI: заявки, поддержка, документы, данные и интеграции — с тестами, документацией и человеческим контролем."
   structuredData={personSchema}
 >
-  <section class="hero section">
-    <div class="container hero__grid">
+  <section class="hero">
+    <div class="container hero__frame">
+      <img
+        class="hero__image"
+        src="/images/hero-automation-architecture.webp"
+        width="1586"
+        height="992"
+        alt=""
+        fetchpriority="high"
+      />
       <div class="hero__copy">
         <p class="eyebrow">Иван Новичков · разработчик AI-автоматизаций</p>
         <h1 class="display">Автоматизирую ручные бизнес-процессы с помощью n8n и AI.</h1>
@@ -67,26 +74,21 @@ const process = [
         </p>
         <div class="button-row">
           <a class="button button--primary" href="https://t.me/novichkov_ivan">Обсудить процесс</a>
-          <a class="button" href="#cases">Смотреть кейсы</a>
+          <a class="button button--light" href="#cases">Смотреть кейсы</a>
         </div>
       </div>
-      <div class="hero__visual">
-        <WorkflowMap
-          label="Подход к автоматизации"
-          steps={[
-            'Входящее событие',
-            'Валидация',
-            'Правила',
-            'AI при необходимости',
-            'Human review',
-            'Результат + лог',
-          ]}
-        />
-        <p class="hero__note mono">AI — часть системы, а не замена проверкам и правилам.</p>
+      <div class="hero__system" aria-label="Принцип построения workflow">
+        <p class="mono">Управляемый workflow</p>
+        <ol>
+          <li><span>01</span>Событие</li>
+          <li><span>02</span>Правила</li>
+          <li><span>03</span>AI</li>
+          <li><span>04</span>Контроль</li>
+        </ol>
       </div>
+      <p class="hero__note mono">AI — часть системы, а не замена проверкам и правилам.</p>
     </div>
   </section>
-
   <section class="proof-strip" aria-label="Доказательства работы">
     <div class="container proof-strip__grid">
       <div><strong>4</strong><span>публичных кейса</span></div>
@@ -206,43 +208,117 @@ const process = [
 
 <style>
   .hero {
-    padding-top: clamp(4rem, 10vw, 8.5rem);
+    overflow: hidden;
+    background: var(--panel);
+    color: white;
   }
 
-  .hero__grid,
-  .section-intro,
-  .process-grid,
-  .reliability__grid,
-  .about__grid {
+  .hero__frame {
+    position: relative;
     display: grid;
-    gap: clamp(2rem, 5vw, 5rem);
+    min-height: min(52rem, calc(100svh - 5rem));
+    align-items: center;
+    isolation: isolate;
+  }
+
+  .hero__frame::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+      linear-gradient(90deg, var(--panel) 0%, rgb(14 19 25 / 96%) 28%, rgb(14 19 25 / 20%) 72%),
+      linear-gradient(0deg, rgb(14 19 25 / 92%) 0%, transparent 42%);
+    content: '';
+  }
+
+  .hero__image {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .hero__copy {
-    align-self: center;
+    position: relative;
+    z-index: 1;
+    max-width: 47rem;
+    padding-block: clamp(5rem, 11vw, 9rem) 13rem;
+  }
+
+  .hero .eyebrow {
+    color: var(--apricot);
   }
 
   .hero .display {
     max-width: 18ch;
     font-size: clamp(2.4rem, 5.4vw, 5.2rem);
-    letter-spacing: -0.055em;
+    font-weight: 570;
+    letter-spacing: -0.058em;
     line-height: 0.98;
     text-wrap: balance;
   }
 
-  .hero__visual {
-    align-self: end;
+  .hero .lede {
+    max-width: 36rem;
+    color: rgb(255 255 255 / 72%);
+  }
+
+  .hero__system {
+    position: absolute;
+    right: 0;
+    bottom: 2rem;
+    left: 0;
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(255 255 255 / 17%);
+  }
+
+  .hero__system > p,
+  .hero__system ol {
+    margin: 0;
+  }
+
+  .hero__system > p {
+    color: rgb(255 255 255 / 46%);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero__system ol {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.45rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero__system li {
+    display: flex;
+    gap: 0.65rem;
+    align-items: center;
+    color: rgb(255 255 255 / 78%);
+    font-size: 0.78rem;
+  }
+
+  .hero__system li span {
+    color: var(--apricot);
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.62rem;
   }
 
   .hero__note {
-    max-width: 32rem;
-    margin: 1rem 0 0;
-    color: var(--muted);
-    font-size: 0.7rem;
+    display: none;
   }
 
   .proof-strip {
-    border-block: 1px solid var(--line);
+    border-block: 1px solid rgb(255 255 255 / 10%);
+    background: var(--panel);
+    color: white;
   }
 
   .proof-strip__grid {
@@ -252,27 +328,37 @@ const process = [
 
   .proof-strip__grid div {
     display: flex;
-    min-height: 8rem;
+    min-height: 8.5rem;
     flex-direction: column;
     justify-content: center;
-    padding: 1rem;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    padding: 1.2rem;
+    border-right: 1px solid rgb(255 255 255 / 10%);
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
   }
 
   .proof-strip strong {
+    color: var(--apricot);
     font-size: clamp(1.5rem, 4vw, 2.6rem);
+    font-weight: 560;
     letter-spacing: -0.045em;
   }
 
   .proof-strip span {
-    color: var(--muted);
+    color: rgb(255 255 255 / 58%);
     font-size: 0.75rem;
+  }
+
+  .section-intro,
+  .process-grid,
+  .reliability__grid,
+  .about__grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 5rem);
   }
 
   .section-intro {
     align-items: end;
-    margin-bottom: 3rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
   }
 
   .work-grid,
@@ -285,10 +371,18 @@ const process = [
     min-height: 18rem;
     padding: 1.5rem;
     border-top: 1px solid var(--ink);
+    transition:
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .work-card:hover {
+    background: var(--paper-soft);
+    transform: translateY(-0.25rem);
   }
 
   .work-card__number {
-    color: var(--coral);
+    color: var(--coral-dark);
     font-size: 0.7rem;
   }
 
@@ -304,13 +398,15 @@ const process = [
   }
 
   .cases-section {
-    background: var(--paper-strong);
+    border-block: 1px solid var(--line);
+    background: var(--paper-soft);
   }
 
   .text-link {
     display: inline-flex;
     gap: 0.5rem;
     margin-top: 1.5rem;
+    color: var(--coral-dark);
     font-weight: 700;
     text-decoration: none;
   }
@@ -329,12 +425,12 @@ const process = [
     display: grid;
     grid-template-columns: 2.5rem 1fr;
     gap: 1rem;
-    padding-block: 1.5rem;
+    padding-block: 1.65rem;
     border-bottom: 1px solid var(--line);
   }
 
   .process-list li > span {
-    color: var(--coral);
+    color: var(--coral-dark);
     font-size: 0.7rem;
   }
 
@@ -354,12 +450,13 @@ const process = [
   }
 
   .reliability {
-    background: var(--panel);
+    background:
+      radial-gradient(circle at 10% 80%, rgb(243 182 120 / 9%), transparent 28rem), var(--panel);
     color: white;
   }
 
   .reliability .eyebrow {
-    color: #ff9b8e;
+    color: var(--apricot);
   }
 
   .reliability__list p {
@@ -372,22 +469,44 @@ const process = [
   }
 
   .reliability__list span {
-    color: var(--lime);
+    color: var(--apricot);
     font-family: 'JetBrains Mono Variable', monospace;
     font-size: 0.7rem;
   }
 
   .about__mark {
+    position: relative;
     display: grid;
+    overflow: hidden;
     width: min(100%, 24rem);
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 5;
     place-items: center;
-    border-radius: 50%;
-    background: var(--coral);
-    color: var(--paper);
+    border-radius: var(--radius-large);
+    background: linear-gradient(145deg, transparent 52%, rgb(243 182 120 / 16%)), var(--panel);
+    box-shadow: var(--shadow);
+    color: var(--apricot);
     font-family: 'JetBrains Mono Variable', monospace;
     font-size: clamp(7rem, 20vw, 13rem);
-    font-weight: 700;
+    font-weight: 500;
+  }
+
+  .about__mark::after {
+    position: absolute;
+    inset: 1.2rem;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: calc(var(--radius-large) - 0.4rem);
+    content: '';
+  }
+
+  @media (min-width: 40rem) {
+    .hero__system {
+      grid-template-columns: 11rem 1fr;
+      align-items: center;
+    }
+
+    .hero__system ol {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   @media (min-width: 48rem) {
@@ -406,10 +525,6 @@ const process = [
   }
 
   @media (min-width: 62rem) {
-    .hero__grid {
-      grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.65fr);
-    }
-
     .section-intro {
       grid-template-columns: 1fr 0.75fr;
     }
@@ -431,6 +546,33 @@ const process = [
     .about__grid {
       grid-template-columns: 0.75fr 1.25fr;
       align-items: center;
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero__frame {
+      min-height: 45rem;
+    }
+
+    .hero__frame::after {
+      background:
+        linear-gradient(
+          90deg,
+          rgb(14 19 25 / 96%) 0%,
+          rgb(14 19 25 / 72%) 68%,
+          rgb(14 19 25 / 32%)
+        ),
+        linear-gradient(0deg, var(--panel) 0%, transparent 50%);
+    }
+
+    .hero__image {
+      object-position: 64% center;
+      opacity: 0.68;
+    }
+
+    .hero__copy {
+      align-self: start;
+      padding-block: 4.5rem 12rem;
     }
   }
 </style>

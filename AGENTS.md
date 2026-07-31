@@ -78,13 +78,14 @@ The build must fail on invalid status, missing/invalid repository URL, or malfor
 
 ## Design system
 
-Direction: light editorial-tech, warm paper background, ink text, coral accent, and dark architecture panels. Fonts are local Manrope Variable and JetBrains Mono Variable.
+Direction: premium editorial-tech based on reference 2 from the 2026-07-31 redesign: a dark graphite header and image-led hero, warm paper content sections, ink text, restrained apricot/copper accents, and dark architecture panels. Fonts are local Manrope Variable and JetBrains Mono Variable.
 
 Avoid cyberpunk templates, stock robots, excessive gradients, emoji cards, and imitation of n8n branding.
 
 Important current hero decision:
 
 - On the homepage, .hero .display uses font-size clamp(2.4rem, 5.4vw, 5.2rem), max-width 18ch, line-height 0.98, and balanced wrapping.
+- The hero uses the original generated asset public/images/hero-automation-architecture.webp: a graphite architectural system with warm light and data paths. Keep it decorative (empty alt), optimized, and paired with real HTML copy; do not replace it with robot, outer-space, cyberpunk, or generic AI-brain imagery.
 - At 903×714 it renders at approximately 48.8 px in three balanced lines. Do not restore the previous oversized version without explicit user approval.
 
 Workflow screenshots are a desired next enhancement. Use real sanitized screenshots, not decorative mockups. Prefer a consistent preview on case cards and a full view plus one or two meaningful crops on case pages. Keep the explanatory text architecture map. Screenshots must not expose credentials, personal data, tokens, real IDs, webhook URLs, or private customer information.

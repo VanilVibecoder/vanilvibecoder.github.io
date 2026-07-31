@@ -98,6 +98,20 @@ PROJECT_MEMORY.md was introduced in PR #4 to preserve the chronology, rationale,
 
 The quality gate also detected newly published advisories affecting Astro 6.3.8 and its transitive dependencies. Astro was updated to the then-current stable 7.1.6 and the compatible sharp update was applied. Production audit returned zero vulnerabilities. Development-only advisories inherited from Lighthouse CI remained outside the required production audit and must be revisited when Lighthouse CI publishes a non-breaking dependency update.
 
+### 2026-07-31 — reference-led visual redesign
+
+Ivan explicitly requested a stronger visual direction and supplied three references. Reference 2 was selected as the primary influence because its premium editorial composition, clear hierarchy, restrained warm light, and architectural scale fit credibility-led sales conversations in Russia and the CIS better than the cyberpunk robot or purely abstract particle references.
+
+The redesign keeps the verified information architecture and factual case content intact while changing the visual system:
+
+- dark graphite header and image-led hero;
+- warm paper content sections for long-form readability;
+- restrained apricot/copper accent instead of a louder coral treatment;
+- more architectural spacing, squared controls, and calmer card surfaces;
+- an original generated hero asset showing structured data entering a controlled system and resolving into a clear output.
+
+The hero asset lives at public/images/hero-automation-architecture.webp. It is decorative, has no embedded text, logo, person, robot, customer data, or product UI, and is served as an optimized WebP. The homepage heading retains the approved clamp(2.4rem, 5.4vw, 5.2rem), 18ch maximum width, 0.98 line height, and balanced wrapping. This direction supersedes the earlier all-light hero while preserving the light editorial content foundation and the prohibition on cyberpunk styling.
+
 ## User-facing information architecture
 
 ### Homepage: /
@@ -232,16 +246,17 @@ Case order is a product decision: strongest broad demonstration first, technical
 
 ## Design architecture
 
-The visual direction is light editorial-tech:
+The visual direction is premium editorial-tech with a dark, image-led opening and a light reading surface:
 
-- warm paper background;
-- dark ink typography;
-- coral as a controlled accent;
+- dark graphite header and hero;
+- warm paper content sections;
+- dark ink typography on light sections and ivory typography on dark sections;
+- restrained apricot/copper as the accent;
 - dark panels for architecture diagrams;
 - local Manrope for primary text;
 - local JetBrains Mono for technical labels.
 
-Avoid cyberpunk styling, stock robots, heavy gradients, emoji cards, and imitation of n8n's brand. Technical credibility comes from clear structure, truthful detail, and real sanitized workflow evidence.
+Avoid cyberpunk styling, stock robots, outer-space AI clichés, heavy gradients, emoji cards, and imitation of n8n's brand. The hero artwork may establish mood, but technical credibility comes from clear structure, truthful detail, and real sanitized workflow evidence.
 
 Responsive behavior is mobile-first. Required visual review widths are 375, 768, and 1440 px. The layout must have no horizontal overflow. Keyboard focus, skip navigation, semantic heading order, WCAG AA contrast, useful alt text, and prefers-reduced-motion must remain intact.
 
