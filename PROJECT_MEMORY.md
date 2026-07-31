@@ -94,7 +94,7 @@ It records positioning, factual constraints, content schema, workflow security, 
 
 ### 2026-07-31 — permanent history and architecture memory
 
-PROJECT_MEMORY.md was introduced to preserve the chronology, rationale, architecture, page logic, release flow, and unresolved work separately from the shorter operational instructions in AGENTS.md. AGENTS.md was linked to this file so a new context window reads both sources before acting.
+PROJECT_MEMORY.md was introduced in PR #4 to preserve the chronology, rationale, architecture, page logic, release flow, and unresolved work separately from the shorter operational instructions in AGENTS.md. AGENTS.md was linked to this file so a new context window reads both sources before acting.
 
 The quality gate also detected newly published advisories affecting Astro 6.3.8 and its transitive dependencies. Astro was updated to the then-current stable 7.1.6 and the compatible sharp update was applied. Production audit returned zero vulnerabilities. Development-only advisories inherited from Lighthouse CI remained outside the required production audit and must be revisited when Lighthouse CI publishes a non-breaking dependency update.
 
