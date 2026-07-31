@@ -4,7 +4,7 @@
 
 This repository contains the public portfolio of Ivan Novichkov (VANIL), an n8n and AI automation developer. The site is live at https://vanilvibecoder.github.io and the repository is https://github.com/VanilVibecoder/vanilvibecoder.github.io.
 
-Before changing anything, read this file completely and inspect git status. Treat the current public site and factual case content as the baseline.
+Before changing anything, read this file and PROJECT_MEMORY.md completely, then inspect git status. Treat the current public site and factual case content as the baseline. PROJECT_MEMORY.md is the durable chronology, architecture, rationale, and roadmap; keep it synchronized when a material decision changes.
 
 ## Owner and contacts
 
@@ -91,7 +91,7 @@ Workflow screenshots are a desired next enhancement. Use real sanitized screensh
 
 ## Stack and important files
 
-- Astro static output, strict TypeScript, Tailwind CSS, npm.
+- Astro 7.1.x static output, strict TypeScript, Tailwind CSS, npm.
 - Astro Content Collections for Markdown case content.
 - Local font packages; no remote font request.
 - src/layouts/BaseLayout.astro — metadata, JSON-LD, header/footer, skip link.
@@ -139,7 +139,7 @@ Run from the repository root:
 
 Local development URL: http://127.0.0.1:4321/.
 
-The latest completed review on 2026-07-17 had:
+The latest completed review on 2026-07-31 had:
 
 - Astro check: 0 errors;
 - unit tests: 3/3;
@@ -182,4 +182,4 @@ A change is complete only when:
 
 ## Starting a new Codex dialogue
 
-Point the new dialogue at this repository and say: “Read AGENTS.md completely, inspect the current branch and public site, then continue from the documented project state.” The new dialogue should not rebuild the site from scratch or overwrite verified case facts without evidence.
+Point the new dialogue at this repository and say: “Read AGENTS.md and PROJECT_MEMORY.md completely. Then inspect git status, the current branch, recent commits, and the public site. Continue from the documented project state.” The new dialogue should not rebuild the site from scratch or overwrite verified case facts without evidence.
