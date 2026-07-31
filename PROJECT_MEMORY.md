@@ -1,0 +1,370 @@
+# VANIL portfolio — permanent project memory
+
+## Purpose of this file
+
+This is the durable history, product logic, and technical memory of the VANIL / Ivan Novichkov portfolio. It complements AGENTS.md:
+
+- AGENTS.md contains current operating rules and release requirements.
+- PROJECT_MEMORY.md explains why the project looks this way, how it evolved, and how its parts fit together.
+
+Every new Codex dialogue must read both files completely before changing the project. Update this document whenever a change affects positioning, architecture, content structure, design decisions, security rules, publishing, or the roadmap.
+
+Last consolidated: 2026-07-31.
+
+## Project identity
+
+- Owner: Ivan Novichkov / Иван Новичков.
+- Visual mark: VANIL.
+- Public identity: VANIL / Иван Новичков.
+- Role: developer of n8n and AI automations.
+- Telegram: https://t.me/novichkov_ivan.
+- Email: ewan.novichkov@yandex.ru.
+- Technical GitHub username: VanilVibecoder.
+- Repository: https://github.com/VanilVibecoder/vanilvibecoder.github.io.
+- Production site: https://vanilvibecoder.github.io.
+
+VanilVibecoder remains the GitHub username but is not the main service brand. The site must keep the real name visible near VANIL.
+
+## Product purpose
+
+The site is a credibility-first portfolio used in manual outreach, job applications, and sales conversations. It proves that Ivan can analyze a process, design an automation, build it, test it, and document it. It does not claim that simply publishing the site will produce organic leads.
+
+Core positioning:
+
+> Автоматизирую ручные бизнес-процессы с помощью n8n и AI.
+>
+> Заявки, поддержка, документы, данные и интеграции — от разбора процесса до протестированного workflow с документацией.
+
+Primary call to action:
+
+> Опишите повторяющийся процесс — я скажу, что имеет смысл автоматизировать.
+
+The positioning is intentionally based on business problems rather than one industry. Service-business cases demonstrate experience but must never be presented as the only market Ivan serves.
+
+## Decision principles
+
+1. Evidence before marketing claims. A case is described only with facts that can be checked in its repository or test notes.
+2. Problems before industries. Services are grouped around requests, support, documents, data, integrations, and workflow stabilization.
+3. Honest status labels. Only demo, training, and public-template are allowed.
+4. Static by default. The MVP has no backend, form, analytics, cookies, React runtime, or intentional client JavaScript.
+5. Safety before downloads. A workflow is linked only after sanitization, automated scanning, and manual n8n review.
+6. Accessibility is part of completion, not optional polish.
+7. A small maintainable portfolio is preferable to speculative features without demand.
+
+## Chronology
+
+### 2026-07-17 — repository and baseline
+
+- The local repository was initialized on main.
+- Commit 4b4e251 created the empty project baseline.
+- Development moved to codex/portfolio-mvp.
+- The public GitHub repository VanilVibecoder/vanilvibecoder.github.io was created.
+
+### 2026-07-17 — portfolio MVP
+
+The initial implementation was split into focused commits before PR #1:
+
+- 1a3a022 configured Astro, TypeScript, Tailwind, npm, formatting, and linting.
+- 4e86c42 built the visual system, layouts, pages, typed case content, SEO, and the four case narratives.
+- ee1b525 added the workflow export scanner, fixtures, tests, CI, Playwright checks, and GitHub Pages deployment.
+
+PR #1 was squash-merged as c7bcb97, Build VANIL portfolio MVP (#1).
+
+During review, axe checks exposed accessibility issues. Coral contrast, heading order, and skip-link focus behavior were corrected. The completed browser suite passed 27 tests across mobile, tablet, and desktop.
+
+### 2026-07-17 — hero scale correction
+
+The first public hero was visually too large around the 903 × 714 viewport and wrapped awkwardly. The heading was reduced and balanced without changing the positioning.
+
+- Feature commit: 1d7753c.
+- PR #2 squash merge: 31e5c36, Refine hero heading scale (#2).
+- Current rule: clamp(2.4rem, 5.4vw, 5.2rem), maximum width 18ch, line height 0.98, balanced wrapping.
+- At 903 × 714 the heading is approximately 48.8 px and forms three balanced lines.
+
+Do not restore the oversized hero without explicit approval from Ivan.
+
+### 2026-07-17 — durable agent context
+
+AGENTS.md was expanded from a short project note into the operating contract for future Codex sessions.
+
+- Feature commit: 25f3c4f.
+- PR #3 squash merge: 5d9b673, Document portfolio project context (#3).
+
+It records positioning, factual constraints, content schema, workflow security, accessibility, quality gates, Git process, and deployment.
+
+### 2026-07-31 — permanent history and architecture memory
+
+PROJECT_MEMORY.md was introduced in PR #4 to preserve the chronology, rationale, architecture, page logic, release flow, and unresolved work separately from the shorter operational instructions in AGENTS.md. AGENTS.md was linked to this file so a new context window reads both sources before acting.
+
+The quality gate also detected newly published advisories affecting Astro 6.3.8 and its transitive dependencies. Astro was updated to the then-current stable 7.1.6 and the compatible sharp update was applied. Production audit returned zero vulnerabilities. Development-only advisories inherited from Lighthouse CI remained outside the required production audit and must be revisited when Lighthouse CI publishes a non-breaking dependency update.
+
+## User-facing information architecture
+
+### Homepage: /
+
+The homepage moves from broad positioning to proof and then to contact:
+
+1. Hero: Ivan's role, broad automation promise, and direct CTA.
+2. What can be automated: recurring business problems, not industries.
+3. Selected cases: evidence of practical work.
+4. Process: analysis → architecture → build and tests → documentation and handoff.
+5. Stack and reliability principles.
+6. About Ivan / VANIL.
+7. Telegram-first contact section with email and GitHub alternatives.
+
+### Case catalogue: /cases/
+
+The catalogue contains all four cases in a deliberate order. Cards expose the honest status, problem, concise outcome, stack, and link to the detail page.
+
+### Case detail: /cases/[slug]/
+
+Each case page is generated from typed Markdown and includes:
+
+- status and summary;
+- problem and automated process;
+- architecture and stack;
+- reliability decisions;
+- tested scenarios;
+- metrics with explicit source or qualification;
+- limitations and roadmap;
+- repository and a safe workflow download when available;
+- gallery entries when sanitized real screenshots are added.
+
+### Not found: /404.html
+
+A custom static 404 keeps navigation and brand continuity on GitHub Pages.
+
+Russian is the only published language in v1. The schema accepts ru and en so a complete English section can be added later, but an empty language switcher must not be shown.
+
+## Technical architecture
+
+The system is a static content pipeline:
+
+    Markdown case files
+            |
+            v
+    Astro Content Collection + Zod validation
+            |
+            v
+    Astro pages and reusable components
+            |
+            v
+    Static HTML, CSS, sitemap, metadata, and JSON-LD
+            |
+            v
+    GitHub Actions build
+            |
+            v
+    GitHub Pages at vanilvibecoder.github.io
+
+There is no production database or application server. Supabase, PostgreSQL, Qdrant, Ollama, and other tools appear as technologies inside case studies; the portfolio itself does not connect to them at runtime.
+
+### Runtime and build stack
+
+- Astro 7.1.x with output set to static.
+- Strict TypeScript.
+- Tailwind CSS 4 through the Vite integration.
+- Astro Content Collections with Zod validation.
+- Local Manrope Variable and JetBrains Mono Variable packages.
+- npm and package-lock.json for reproducible installation.
+- ESLint, Prettier, Node test runner, Playwright, axe, and Lighthouse CI tooling.
+
+### Main modules
+
+- astro.config.mjs sets the canonical production site, static output, sitemap, and Tailwind integration.
+- src/content.config.ts is the source of truth for the case schema.
+- src/content/cases contains one Markdown file per case.
+- src/layouts/BaseLayout.astro owns metadata, canonical links, JSON-LD, skip link, header, and footer.
+- src/pages/index.astro owns the homepage sections and hero.
+- src/pages/cases/index.astro builds the case catalogue.
+- src/pages/cases/[slug].astro generates one static page per case.
+- src/components contains shared brand, navigation, case card, status, footer, and architecture-map UI.
+- src/styles/global.css contains global tokens, typography, layout behavior, focus states, and reduced-motion rules.
+- scripts/audit-workflow-export.mjs scans candidate n8n exports without printing secret values.
+- tests/audit-workflow.test.mjs validates safe and unsafe workflow fixtures.
+- tests/e2e/site.spec.ts covers routes, navigation, cases, contacts, accessibility, responsive layouts, 404, and downloads.
+- .github/workflows/ci.yml runs quality and browser checks.
+- .github/workflows/deploy.yml publishes the static build from main to GitHub Pages.
+
+## Content model
+
+The cases collection validates these fields:
+
+- slug, locale, title, eyebrow, summary;
+- status: demo, training, or public-template;
+- featured, order, stack, problems, optional nodeCount;
+- repoUrl and optional releaseUrl;
+- metrics, where every item requires value, label, and a meaningful source;
+- testedScenarios, limitations, architecture, gallery, and updatedAt.
+
+Invalid statuses, missing or invalid GitHub repository links, and metrics without meaningful qualification stop the build. This is intentional: marketing copy cannot bypass the factual contract.
+
+## Case inventory and truth boundaries
+
+### 1. AI Front Office
+
+- Slug: ai-front-office.
+- Status: demo.
+- Role: flagship demonstration MVP.
+- Verified scope: four workflows and 95 nodes.
+- Never describe it as a confirmed client production deployment without new evidence.
+
+### 2. RAG-поддержка Motorika
+
+- Slug: rag-motorika.
+- Status: demo.
+- Architecture includes Qdrant, Ollama, PostgreSQL/Supabase, and an admin API.
+- Treat the service-business context as a use case, not an exclusive specialization.
+
+### 3. AI Lead Triage
+
+- Slug: ai-lead-triage.
+- Status: training.
+- The training label must remain visible and unambiguous.
+
+### 4. LinkedIn Job Scout
+
+- Slug: linkedin-job-scout.
+- Status: public-template.
+- Published numbers describe one test run and are not production KPIs.
+
+Case order is a product decision: strongest broad demonstration first, technically distinctive RAG case second, explicitly educational work third, and reusable public template fourth.
+
+## Design architecture
+
+The visual direction is light editorial-tech:
+
+- warm paper background;
+- dark ink typography;
+- coral as a controlled accent;
+- dark panels for architecture diagrams;
+- local Manrope for primary text;
+- local JetBrains Mono for technical labels.
+
+Avoid cyberpunk styling, stock robots, heavy gradients, emoji cards, and imitation of n8n's brand. Technical credibility comes from clear structure, truthful detail, and real sanitized workflow evidence.
+
+Responsive behavior is mobile-first. Required visual review widths are 375, 768, and 1440 px. The layout must have no horizontal overflow. Keyboard focus, skip navigation, semantic heading order, WCAG AA contrast, useful alt text, and prefers-reduced-motion must remain intact.
+
+## Workflow screenshot strategy
+
+Real workflow screenshots are the highest-value visual follow-up because they show actual implementation complexity. They are not yet a reason to replace the text architecture maps.
+
+When added:
+
+1. Use a consistent preview crop on cards.
+2. Use a full workflow view plus one or two meaningful detail crops on case pages.
+3. Preserve an accessible text explanation of the architecture.
+4. Remove credentials, tokens, personal data, real IDs, webhook URLs, private customer information, and identifying pinned data.
+5. Prefer legible screenshots over decorative full-canvas images where nodes cannot be read.
+
+## Workflow publication and security model
+
+Public demonstration exports may use MIT where appropriate. Production and private versions remain closed. The case repository is the source; the portfolio should link to a stable sanitized GitHub Release asset rather than a mutable raw file.
+
+Before publishing a JSON or JSON.GZ export:
+
+    npm run audit:workflows -- PATH
+
+The scanner rejects active workflows, credentials, top-level id, versionId, meta, pin/static data, real Telegram, Sheet, or webhook identifiers, and strings resembling secrets. Its output may show only finding codes and suspicious field paths, never the suspected values.
+
+Every public workflow also needs a manual official n8n review. Automated scanning is necessary but not sufficient. Never publish telegram-sales-payment-automation-n8n or the empty telegram-rag-chat-bot-n8n repository.
+
+## SEO and delivery logic
+
+BaseLayout provides unique metadata, canonical URLs, Open Graph data, and JSON-LD. The build generates a sitemap; public/robots.txt controls indexing. Person markup represents Ivan, while case pages may expose SoftwareSourceCode semantics.
+
+The project is built by GitHub Actions. Only a merged change on main is production. A green pull request is not proof of deployment: after the Pages workflow completes, verify https://vanilvibecoder.github.io directly.
+
+## Quality gates
+
+Run from the repository root after material changes:
+
+    npm run format:check
+    npm run lint
+    npm run check
+    npm test
+    npm run build
+    npm run test:e2e
+    npm audit --omit=dev
+
+Also audit each changed workflow export. Visual changes require review at 375, 768, and 1440 px. Lighthouse targets are performance at least 90 and accessibility, best practices, and SEO at least 95.
+
+The last full review recorded before this memory file was 2026-07-17:
+
+- Astro check: 0 errors.
+- Unit tests: 3 of 3.
+- Playwright and axe: 27 of 27 across mobile, tablet, and desktop.
+- Production dependency audit: 0 vulnerabilities.
+- Production site: HTTP 200.
+
+The documentation and Astro 7.1.6 update were fully verified on 2026-07-31:
+
+- Formatting and lint passed.
+- Astro check: 0 errors, with 3 non-blocking deprecation hints.
+- Unit tests: 3 of 3.
+- Static build: 7 pages.
+- Playwright and axe: 27 of 27 across mobile, tablet, and desktop.
+- Production dependency audit: 0 vulnerabilities.
+- No workflow JSON or workflow download changed, so manual n8n review was not applicable.
+
+Historical results are context only; they never replace checks for a new change.
+
+## Git and release workflow
+
+1. Fetch origin and start from origin/main.
+2. Create a focused codex/* branch.
+3. Keep unrelated user changes untouched.
+4. Run the local quality gate.
+5. Stage only intended files and create a focused commit.
+6. Push the branch and open a draft pull request.
+7. Wait for quality and browser CI.
+8. Merge only after checks pass.
+9. Wait for the Pages deployment.
+10. Verify the public URL directly.
+
+## Deliberate MVP exclusions
+
+These are not missing by accident:
+
+- backend or server functions;
+- React or another client framework;
+- contact form;
+- analytics and cookies;
+- runtime Supabase integration;
+- incomplete English pages;
+- unverified testimonials, ROI, savings, uptime, and production outcomes.
+
+Add them only when they solve a demonstrated problem and can be maintained safely.
+
+## Current roadmap
+
+1. Add sanitized real n8n workflow screenshots to cards and detail pages.
+2. Replace raw or folder links with stable sanitized GitHub Release assets.
+3. Complete and record the manual official n8n review for every downloadable workflow.
+4. Use the site in weekly problem-specific manual outreach and link prospects to the closest case rather than only the homepage.
+5. Update copy based on real objections and conversations.
+6. Add problem-specific landing pages only after repeated demand.
+7. Add /en/ only when the complete English experience is ready.
+
+## How to use this memory in another context window
+
+Open the repository and give Codex this instruction:
+
+> Прочитай AGENTS.md и PROJECT_MEMORY.md полностью. Затем проверь git status, текущую ветку, последние коммиты и публичный сайт. Продолжай из задокументированного состояния; не пересобирай проект с нуля и не меняй факты кейсов без доказательств.
+
+If the public site, repository state, or these documents disagree, stop and investigate Git history and the deployed build. Do not silently choose the more convenient version.
+
+## Memory maintenance protocol
+
+Update this file in the same pull request whenever a change affects:
+
+- product positioning or CTA;
+- brand naming or key visual decisions;
+- routes, content schema, or case ordering;
+- architecture, dependencies, or runtime behavior;
+- case status, metrics, sources, limitations, or workflow links;
+- security and workflow publication rules;
+- CI, tests, deployment, or production URL;
+- completed milestones or roadmap priorities.
+
+Add a dated chronology entry with the PR or commit when known. Preserve previous decisions and mark them superseded instead of deleting their history. Keep secrets and private customer data out of this file.
