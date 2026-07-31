@@ -33,7 +33,19 @@ const cases = (await getCollection('cases', ({ data }) => data.locale === 'ru'))
 
 <style>
   .cases-hero {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    background:
+      radial-gradient(circle at 78% 35%, rgb(243 182 120 / 12%), transparent 24rem),
+      linear-gradient(125deg, var(--panel) 0 70%, #161e27);
+    color: white;
+  }
+
+  .cases-hero .eyebrow {
+    color: var(--apricot);
+  }
+
+  .cases-hero .lede {
+    color: rgb(255 255 255 / 66%);
   }
 
   .cases-hero__grid,

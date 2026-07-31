@@ -4,19 +4,23 @@
 
 :root {
   color-scheme: light;
-  --paper: #f6f2ea;
-  --paper-strong: #eee8de;
-  --ink: #151a20;
-  --ink-soft: #46515d;
-  --muted: #596571;
-  --line: #d5cec3;
-  --coral: #b54133;
-  --coral-dark: #8b2e24;
-  --panel: #10151b;
-  --panel-soft: #1d252e;
-  --lime: #c5e66f;
-  --radius: 1.25rem;
-  --shadow: 0 24px 70px rgb(21 26 32 / 9%);
+  --paper: #f3efe7;
+  --paper-strong: #e8e1d7;
+  --paper-soft: #fbf8f2;
+  --ink: #171b20;
+  --ink-soft: #414a54;
+  --muted: #606a74;
+  --line: #cec6ba;
+  --coral: #ad4e27;
+  --coral-dark: #843718;
+  --apricot: #f3b678;
+  --panel: #0e1319;
+  --panel-soft: #171e26;
+  --panel-muted: #232c35;
+  --lime: #c6df8b;
+  --radius: 0.35rem;
+  --radius-large: 1.4rem;
+  --shadow: 0 28px 80px rgb(17 21 26 / 12%);
 }
 
 * {
@@ -31,9 +35,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    linear-gradient(90deg, transparent 0 95%, rgb(232 93 74 / 5%) 95% 100%) 0 0 / 72px 72px,
-    var(--paper);
+  background: var(--paper);
   color: var(--ink);
   font-family: 'Manrope Variable', system-ui, sans-serif;
   font-size: 1rem;
@@ -68,12 +70,12 @@ svg {
 }
 
 .container {
-  width: min(100% - 2rem, 74rem);
+  width: min(100% - clamp(2rem, 5vw, 5rem), 78rem);
   margin-inline: auto;
 }
 
 .section {
-  padding-block: clamp(4.5rem, 8vw, 8rem);
+  padding-block: clamp(5rem, 9vw, 9rem);
 }
 
 .section--tight {
@@ -89,13 +91,13 @@ svg {
   font-family: 'JetBrains Mono Variable', monospace;
   font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
 .eyebrow::before {
-  width: 1.75rem;
-  height: 2px;
+  width: 1.45rem;
+  height: 1px;
   background: currentColor;
   content: '';
 }
@@ -104,7 +106,7 @@ svg {
   max-width: 15ch;
   margin: 0;
   font-size: clamp(2.65rem, 8vw, 6.8rem);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.065em;
   line-height: 0.94;
 }
@@ -113,9 +115,9 @@ svg {
   max-width: 16ch;
   margin: 0;
   font-size: clamp(2rem, 5vw, 4.2rem);
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1;
+  font-weight: 620;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
 }
 
 .lede {
@@ -138,9 +140,9 @@ svg {
   align-items: center;
   justify-content: center;
   gap: 0.7rem;
-  padding: 0.8rem 1.15rem;
+  padding: 0.8rem 1.3rem;
   border: 1px solid var(--ink);
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: transparent;
   color: var(--ink);
   font-weight: 700;
@@ -152,9 +154,9 @@ svg {
 }
 
 .button:hover {
-  transform: translateY(-2px);
   background: var(--ink);
   color: white;
+  transform: translateY(-2px);
 }
 
 .button--primary {
@@ -166,6 +168,12 @@ svg {
 .button--primary:hover {
   border-color: var(--coral-dark);
   background: var(--coral-dark);
+}
+
+.button--primary::after {
+  content: '\2197';
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 0.85rem;
 }
 
 .button--light {
@@ -192,6 +200,10 @@ svg {
   max-width: 48rem;
   color: var(--ink-soft);
   font-size: 1.05rem;
+}
+
+.prose strong {
+  color: var(--ink);
 }
 
 .prose h2 {

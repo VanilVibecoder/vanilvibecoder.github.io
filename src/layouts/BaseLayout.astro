@@ -30,7 +30,7 @@ const ogImage = new URL(image, Astro.site);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f6f2ea" />
+    <meta name="theme-color" content="#0e1319" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -64,9 +64,9 @@ const ogImage = new URL(image, Astro.site);
     top: 0.75rem;
     left: 0.75rem;
     padding: 0.7rem 1rem;
-    border-radius: 999px;
-    background: var(--ink);
-    color: white;
+    border-radius: var(--radius);
+    background: var(--paper-soft);
+    color: var(--ink);
     text-decoration: none;
     transform: translateY(-160%);
   }

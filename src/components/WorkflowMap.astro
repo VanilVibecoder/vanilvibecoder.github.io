@@ -28,8 +28,9 @@ const { steps, label = 'Схема workflow' } = Astro.props;
   .workflow-map {
     overflow: hidden;
     border: 1px solid rgb(255 255 255 / 8%);
-    border-radius: var(--radius);
-    background: var(--panel);
+    border-radius: var(--radius-large);
+    background:
+      radial-gradient(circle at 90% 10%, rgb(243 182 120 / 8%), transparent 16rem), var(--panel);
     box-shadow: var(--shadow);
     color: white;
   }
@@ -74,7 +75,7 @@ const { steps, label = 'Схема workflow' } = Astro.props;
   }
 
   .workflow-map__index {
-    color: #ff9b8e;
+    color: var(--apricot);
     font-family: 'JetBrains Mono Variable', monospace;
     font-size: 0.7rem;
   }
@@ -87,7 +88,7 @@ const { steps, label = 'Схема workflow' } = Astro.props;
 
     li {
       border: 1px solid rgb(255 255 255 / 9%);
-      border-radius: 0.8rem;
+      border-radius: var(--radius);
       background: var(--panel-soft);
     }
   }

@@ -45,7 +45,7 @@ const softwareSchema = {
               <a class="button button--primary" href={data.repoUrl}>GitHub</a>
               {
                 data.releaseUrl && (
-                  <a class="button" href={data.releaseUrl}>
+                  <a class="button button--light" href={data.releaseUrl}>
                     Открыть workflow
                   </a>
                 )
@@ -105,13 +105,17 @@ const softwareSchema = {
 <style>
   .case-hero {
     padding-top: 3rem;
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    background:
+      radial-gradient(circle at 76% 36%, rgb(243 182 120 / 11%), transparent 28rem), var(--panel);
+    color: white;
   }
 
   .back-link {
     display: inline-flex;
     margin-bottom: clamp(3rem, 7vw, 6rem);
-    color: var(--muted);
-    font-size: 0.85rem;
+    color: rgb(255 255 255 / 58%);
+    font-size: 0.82rem;
     font-weight: 700;
     text-decoration: none;
   }
@@ -125,6 +129,16 @@ const softwareSchema = {
 
   .case-hero__eyebrow {
     margin-top: 2rem;
+    color: var(--apricot);
+  }
+
+  .case-hero .display {
+    font-size: clamp(2.65rem, 6.5vw, 6.2rem);
+    font-weight: 570;
+  }
+
+  .case-hero .lede {
+    color: rgb(255 255 255 / 68%);
   }
 
   .stack-list {
@@ -138,15 +152,15 @@ const softwareSchema = {
 
   .stack-list li {
     padding: 0.35rem 0.6rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    color: var(--muted);
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: var(--radius);
+    color: rgb(255 255 255 / 60%);
     font-family: 'JetBrains Mono Variable', monospace;
     font-size: 0.65rem;
   }
 
   .metric-band {
-    border-block: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
     background: var(--paper-strong);
   }
 
@@ -164,7 +178,9 @@ const softwareSchema = {
   }
 
   .metric-band strong {
+    color: var(--coral-dark);
     font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight: 570;
     letter-spacing: -0.06em;
     line-height: 1;
   }
@@ -186,14 +202,14 @@ const softwareSchema = {
   }
 
   .fact-panel {
-    padding: 1.4rem;
+    padding: 1.5rem;
     border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: rgb(255 255 255 / 35%);
+    border-radius: var(--radius-large);
+    background: var(--paper-soft);
   }
 
   .fact-panel--warning {
-    border-color: rgb(232 93 74 / 35%);
+    border-color: rgb(173 78 39 / 38%);
   }
 
   .fact-panel__label {
