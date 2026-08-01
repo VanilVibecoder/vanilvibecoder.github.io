@@ -2,10 +2,12 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 const cases = [
-  ['ai-front-office', 'AI Front Office для входящих заявок'],
-  ['rag-motorika', 'RAG-поддержка Motorika'],
-  ['ai-lead-triage', 'AI Lead Triage'],
-  ['linkedin-job-scout', 'Поиск вакансий и AI-подготовка отклика'],
+  ['ai-front-office', 'AI Front Office для входящих заявок', true],
+  ['rag-motorika', 'RAG-поддержка Motorika', true],
+  ['ai-lead-triage', 'AI Lead Triage', true],
+  ['linkedin-job-scout', 'Поиск вакансий и AI-подготовка отклика', true],
+  ['ai-content-factory-lite', 'AI Content Factory Lite', false],
+  ['ai-price-list-auditor', 'AI-аудитор прайс-листов', false],
 ] as const;
 
 test('homepage presents broad positioning, navigation and working contacts', async ({ page }) => {
@@ -37,19 +39,17 @@ test('homepage presents broad positioning, navigation and working contacts', asy
   expect(accessibility.violations).toEqual([]);
 });
 
-test('case catalogue contains four honest case statuses', async ({ page }) => {
+test('case catalogue contains six honest case statuses', async ({ page }) => {
   await page.goto('/cases/');
 
-  await expect(page.locator('article.case-card')).toHaveCount(4);
+  await expect(page.locator('article.case-card')).toHaveCount(6);
   await expect(page.getByText('Демонстрационный MVP').first()).toBeVisible();
-  await expect(page.getByText('Учебный кейс')).toBeVisible();
+  await expect(page.getByText('Учебный кейс').first()).toBeVisible();
   await expect(page.getByText('Публичный шаблон')).toBeVisible();
 });
 
-for (const [slug, title] of cases) {
-  test(`case ${slug} exposes architecture, tests, limitations and workflow link`, async ({
-    page,
-  }) => {
+for (const [slug, title, hasWorkflowDownload] of cases) {
+  test(`case ${slug} exposes architecture, tests, limitations and repository`, async ({ page }) => {
     await page.goto(`/cases/${slug}/`);
 
     await expect(page.getByRole('heading', { name: title })).toBeVisible();
@@ -59,10 +59,15 @@ for (const [slug, title] of cases) {
       'href',
       new RegExp('github[.]com/VanilVibecoder/'),
     );
-    await expect(page.getByRole('link', { name: 'Открыть workflow' })).toHaveAttribute(
-      'href',
-      new RegExp('^https://(github|raw[.]githubusercontent)[.]com/'),
-    );
+    const workflowLink = page.getByRole('link', { name: 'Открыть workflow' });
+    if (hasWorkflowDownload) {
+      await expect(workflowLink).toHaveAttribute(
+        'href',
+        new RegExp('^https://(github|raw[.]githubusercontent)[.]com/'),
+      );
+    } else {
+      await expect(workflowLink).toHaveCount(0);
+    }
   });
 }
 

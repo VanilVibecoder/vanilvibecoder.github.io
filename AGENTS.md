@@ -44,7 +44,7 @@ Primary CTA:
 Published routes:
 
 - / — positioning, problem-based services, selected cases, process, reliability, about, contacts.
-- /cases/ — catalogue of four cases.
+- /cases/ — catalogue of six cases.
 - /cases/[slug]/ — typed case detail pages.
 - /404.html — custom static 404.
 
@@ -60,6 +60,10 @@ Keep this order and honest status:
 2. rag-motorika — RAG-поддержка Motorika, demo, Qdrant, Ollama, PostgreSQL/Supabase and admin API.
 3. ai-lead-triage — AI Lead Triage, training.
 4. linkedin-job-scout — LinkedIn Job Scout, public-template; numbers describe one test run, not production KPI.
+5. ai-content-factory-lite — AI Content Factory Lite, demo; 64-node main workflow, PostgreSQL state machine, media generation, FFmpeg renderer and human review.
+6. ai-price-list-auditor — AI Price List Auditor, training; synthetic CSV/XLSX test data, local Ollama mapping and deterministic validation.
+
+The two newest repositories contain top-level `pinData`, so they may have repository links but must not receive direct workflow download links until the field is removed and the strict portfolio scanner passes.
 
 Case source files live in src/content/cases. Each case must include the problem, automated process, architecture, stack, reliability decisions, tested scenarios, limitations, roadmap, repository link, and safe workflow link when available.
 
