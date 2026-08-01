@@ -9,7 +9,7 @@ This is the durable history, product logic, and technical memory of the VANIL / 
 
 Every new Codex dialogue must read both files completely before changing the project. Update this document whenever a change affects positioning, architecture, content structure, design decisions, security rules, publishing, or the roadmap.
 
-Last consolidated: 2026-07-31.
+Last consolidated: 2026-08-01.
 
 ## Project identity
 
@@ -112,6 +112,17 @@ The redesign keeps the verified information architecture and factual case conten
 
 The hero asset lives at public/images/hero-automation-architecture.webp. It is decorative, has no embedded text, logo, person, robot, customer data, or product UI, and is served as an optimized WebP. The homepage heading retains the approved clamp(2.4rem, 5.4vw, 5.2rem), 18ch maximum width, 0.98 line height, and balanced wrapping. This direction supersedes the earlier all-light hero while preserving the light editorial content foundation and the prohibition on cyberpunk styling.
 
+PR #5 was squash-merged as 37f0c8b, Redesign portfolio visual system (#5), and deployed to GitHub Pages.
+
+### 2026-08-01 — expanded public case catalogue
+
+The portfolio catalogue was expanded from four to six verified public cases without changing the original order:
+
+- AI Content Factory Lite was added as a demo: a 64-node main workflow with PostgreSQL state, budget controls, media generation, a FastAPI/FFmpeg renderer, human review, and a separate error workflow.
+- AI Price List Auditor was added as training work: a synthetic CSV/XLSX pipeline with local Ollama column mapping, deterministic validation, duplicate classification, and format conversion.
+
+Both source repositories contain public workflow exports, but the portfolio's stricter scanner rejects their top-level `pinData` field even when empty. The case pages therefore link to the repositories and disclose the limitation, but intentionally omit direct workflow-download buttons until the exports are re-sanitized and pass the strict scanner. The repository `telegram-rag-chat-bot-n8n` remains excluded under the existing publication rule; the portfolio repository and `vibecodeCODEX` are not separate n8n case studies.
+
 ## User-facing information architecture
 
 ### Homepage: /
@@ -128,7 +139,7 @@ The homepage moves from broad positioning to proof and then to contact:
 
 ### Case catalogue: /cases/
 
-The catalogue contains all four cases in a deliberate order. Cards expose the honest status, problem, concise outcome, stack, and link to the detail page.
+The catalogue contains all six cases in a deliberate order. Cards expose the honest status, problem, concise outcome, stack, and link to the detail page.
 
 ### Case detail: /cases/[slug]/
 
@@ -242,7 +253,22 @@ Invalid statuses, missing or invalid GitHub repository links, and metrics withou
 - Status: public-template.
 - Published numbers describe one test run and are not production KPIs.
 
-Case order is a product decision: strongest broad demonstration first, technically distinctive RAG case second, explicitly educational work third, and reusable public template fourth.
+### 5. AI Content Factory Lite
+
+- Slug: ai-content-factory-lite.
+- Status: demo.
+- Verified scope: 64 nodes in the main workflow, PostgreSQL state machine, FastAPI/FFmpeg renderer, human review, and 21 documented test scenarios.
+- Direct workflow download remains blocked until top-level `pinData` is removed and the strict scanner passes.
+
+### 6. AI Price List Auditor
+
+- Slug: ai-price-list-auditor.
+- Status: training.
+- Verified scope: the published synthetic fixture contains 10 input rows, 6 expected output rows and 4 excluded rows; the workflow uses local Qwen 2.5 7B mapping and deterministic validation rules. The repository README still describes an older 35-to-31 demonstration, so the portfolio follows the checked-in fixture instead.
+- Treat the numbers as one synthetic demonstration, never as production performance or a client outcome.
+- Direct workflow download remains blocked until top-level `pinData` is removed and the strict scanner passes.
+
+Case order remains a product decision: the original four retain their established sequence, while the two newer public projects are appended in repository publication order. Revisit featured ordering only with explicit product intent and evidence from real sales conversations.
 
 ## Design architecture
 
