@@ -1,0 +1,75 @@
+---
+import SiteCard from '../../components/SiteCard.astro';
+import { sites as allSites } from '../../data/sites';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const sites = allSites.filter((site) => site.locale === 'ru').sort((a, b) => a.order - b.order);
+---
+
+<BaseLayout
+  title="Сайты и веб-проекты — VANIL / Иван Новичков"
+  description="Демонстрационные веб-проекты Ивана Новичкова: задача, интерфейс, функции, ограничения и доступная живая версия."
+>
+  <section class="section sites-hero">
+    <div class="container sites-hero__grid">
+      <div>
+        <p class="eyebrow">Веб-разработка</p>
+        <h1 class="display">Сайты, которые ведут к действию.</h1>
+      </div>
+      <p class="lede">
+        Проектирую структуру, интерфейс и пользовательский путь под конкретную задачу бизнеса. В
+        каждой работе отдельно показываю функции, аудиторию и честные ограничения.
+      </p>
+    </div>
+  </section>
+  <section class="section--tight">
+    <div class="container site-grid">
+      {sites.map((entry, index) => <SiteCard entry={entry} index={index} />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sites-hero {
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    background:
+      radial-gradient(circle at 78% 35%, rgb(243 182 120 / 12%), transparent 24rem),
+      linear-gradient(125deg, var(--panel) 0 70%, #161e27);
+    color: white;
+  }
+
+  .sites-hero .eyebrow {
+    color: var(--apricot);
+  }
+
+  .sites-hero .lede {
+    color: rgb(255 255 255 / 66%);
+  }
+
+  .sites-hero__grid,
+  .site-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .sites-hero__grid {
+    align-items: end;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .sites-hero__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .site-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .site-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

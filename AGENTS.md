@@ -2,7 +2,7 @@
 
 ## Handoff summary
 
-This repository contains the public portfolio of Ivan Novichkov (VANIL), an n8n and AI automation developer. The site is live at https://vanilvibecoder.github.io and the repository is https://github.com/VanilVibecoder/vanilvibecoder.github.io.
+This repository contains the public portfolio of Ivan Novichkov (VANIL), a web and AI automation developer. The site is live at https://vanilvibecoder.github.io and the repository is https://github.com/VanilVibecoder/vanilvibecoder.github.io.
 
 Before changing anything, read this file and PROJECT_MEMORY.md completely, then inspect git status. Treat the current public site and factual case content as the baseline. PROJECT_MEMORY.md is the durable chronology, architecture, rationale, and roadmap; keep it synchronized when a material decision changes.
 
@@ -20,19 +20,19 @@ The site is a credibility-first portfolio for manual outreach, applications, and
 
 Primary positioning:
 
-> Автоматизирую ручные бизнес-процессы с помощью n8n и AI.
-> Заявки, поддержка, документы, данные и интеграции — от разбора процесса до протестированного workflow с документацией.
+> Создаю сайты и автоматизирую ручные процессы.
+> От структуры и интерфейса сайта до n8n- и AI-workflow: разбираю задачу, собираю решение, проверяю сценарии и фиксирую ограничения.
 
 Position by business problem, never by a single industry. Service-business examples are evidence, not a specialization boundary. Do not use “only for car services”, “for service businesses”, or similar restrictions in the hero.
 
 Primary CTA:
 
-> Опишите повторяющийся процесс — я скажу, что имеет смысл автоматизировать.
+> Опишите задачу — я предложу подход: веб-интерфейс, автоматизацию или их связку.
 
 ## Brand and writing
 
 - VANIL is the short visual mark; Иван Новичков must remain visible beside it.
-- In the hero, retain “Иван Новичков · разработчик AI-автоматизаций”.
+- In the hero, retain “Иван Новичков · разработчик сайтов и AI-автоматизаций”.
 - Use plain, specific Russian. Prefer process language over generic “AI transformation” claims.
 - Never invent clients, testimonials, savings, ROI, uptime, or production outcomes.
 - Every metric must include a source or explicit qualification.
@@ -43,7 +43,9 @@ Primary CTA:
 
 Published routes:
 
-- / — positioning, problem-based services, selected cases, process, reliability, about, contacts.
+- / — two service directions, selected web and automation work, process, reliability, about, contacts.
+- /sites/ — catalogue of web projects.
+- /sites/[slug]/ — typed web-project detail pages sourced from src/data/sites.ts.
 - /cases/ — catalogue of six cases.
 - /cases/[slug]/ — typed case detail pages.
 - /404.html — custom static 404.
@@ -69,7 +71,7 @@ Case source files live in src/content/cases. Each case must include the problem,
 
 ## Content schema
 
-The cases Content Collection is defined in src/content.config.ts. Important fields include:
+The cases Content Collection schema and its local Markdown loader are defined in src/content.config.ts. Important fields include:
 
 - slug, locale, title, eyebrow, summary;
 - status: only demo, training, or public-template;
@@ -101,6 +103,8 @@ Workflow screenshots are a desired next enhancement. Use real sanitized screensh
 - Local font packages; no remote font request.
 - src/layouts/BaseLayout.astro — metadata, JSON-LD, header/footer, skip link.
 - src/pages/index.astro — homepage and hero.
+- src/pages/sites/ — web-project catalogue and dynamic detail route.
+- src/data/sites.ts — typed web-project facts, links, screenshots, limitations, and detail copy.
 - src/pages/cases/ — catalogue and dynamic case route.
 - src/styles/global.css — tokens and global layout.
 - scripts/audit-workflow-export.mjs — n8n export safety scanner.

@@ -1,0 +1,304 @@
+---
+import StatusBadge from '../../components/StatusBadge.astro';
+import { sites, type SiteProject } from '../../data/sites';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  return sites
+    .filter((site) => site.locale === 'ru')
+    .map((site) => ({ params: { slug: site.slug }, props: { site } }));
+}
+
+const { site: data } = Astro.props as { site: SiteProject };
+
+const creativeWorkSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: data.title,
+  description: data.summary,
+  url: data.liveUrl,
+  creator: { '@type': 'Person', name: 'Иван Новичков' },
+  dateModified: data.updatedAt,
+};
+---
+
+<BaseLayout
+  title={`${data.title} — веб-проект VANIL / Ивана Новичкова`}
+  description={data.summary}
+  canonicalPath={`/sites/${data.slug}/`}
+  structuredData={creativeWorkSchema}
+>
+  <article>
+    <header class="site-hero section">
+      <div class="container">
+        <a class="back-link" href="/sites/">← Все сайты</a>
+        <div class="site-hero__grid">
+          <div>
+            <StatusBadge status={data.status} />
+            <p class="eyebrow site-hero__eyebrow">{data.eyebrow}</p>
+            <h1 class="display">{data.title}</h1>
+            <p class="lede">{data.summary}</p>
+            <div class="button-row">
+              <a class="button button--primary" href={data.liveUrl}>Открыть сайт</a>
+              {
+                data.adminUrl && (
+                  <a class="button button--light" href={data.adminUrl}>
+                    Открыть редактор
+                  </a>
+                )
+              }
+            </div>
+          </div>
+          <div class="site-hero__preview">
+            <img src={data.gallery[0].src} alt={data.gallery[0].alt} width="1440" height="1000" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section--tight fact-band" aria-label="Ключевые функции">
+      <div class="container fact-band__grid">
+        {
+          data.features.slice(0, 4).map((feature, index) => (
+            <div>
+              <span class="mono">{String(index + 1).padStart(2, '0')}</span>
+              <p>{feature}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container site-content">
+        <div class="prose">
+          {
+            data.sections.map((section) => (
+              <section>
+                <h2>{section.title}</h2>
+                {section.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </section>
+            ))
+          }
+        </div>
+        <aside>
+          <section class="fact-panel">
+            <p class="fact-panel__label mono">Для кого</p>
+            <ul>
+              {data.audience.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+          <section class="fact-panel">
+            <p class="fact-panel__label mono">Проверено</p>
+            <ul>
+              {data.testedScenarios.map((scenario) => <li>{scenario}</li>)}
+            </ul>
+          </section>
+          <section class="fact-panel fact-panel--warning">
+            <p class="fact-panel__label mono">Ограничения</p>
+            <ul>
+              {data.limitations.map((limitation) => <li>{limitation}</li>)}
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section gallery-section">
+      <div class="container">
+        <div class="gallery-intro">
+          <p class="eyebrow">Интерфейс</p>
+          <h2 class="section-title">Витрина и управление контентом.</h2>
+        </div>
+        <div class="gallery-grid">
+          {
+            data.gallery.map((item) => (
+              <figure>
+                <img src={item.src} alt={item.alt} width="1440" height="1000" loading="lazy" />
+                {item.caption && <figcaption>{item.caption}</figcaption>}
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .site-hero {
+    padding-top: 3rem;
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    background:
+      radial-gradient(circle at 76% 36%, rgb(243 182 120 / 11%), transparent 28rem), var(--panel);
+    color: white;
+  }
+
+  .back-link {
+    display: inline-flex;
+    margin-bottom: clamp(3rem, 7vw, 6rem);
+    color: rgb(255 255 255 / 58%);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .site-hero__grid,
+  .site-content,
+  .fact-band__grid,
+  .gallery-grid {
+    display: grid;
+    gap: clamp(1rem, 4vw, 3rem);
+  }
+
+  .site-hero__grid {
+    align-items: center;
+  }
+
+  .site-hero__eyebrow {
+    margin-top: 2rem;
+    color: var(--apricot);
+  }
+
+  .site-hero .display {
+    font-size: clamp(2.65rem, 6.5vw, 6.2rem);
+    font-weight: 570;
+  }
+
+  .site-hero .lede {
+    color: rgb(255 255 255 / 68%);
+  }
+
+  .site-hero__preview {
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: var(--radius-large);
+    box-shadow: 0 30px 90px rgb(0 0 0 / 35%);
+  }
+
+  .site-hero__preview img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .fact-band {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-strong);
+  }
+
+  .fact-band__grid > div {
+    padding: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .fact-band span {
+    color: var(--coral-dark);
+    font-size: 0.7rem;
+  }
+
+  .fact-band p {
+    margin: 1.2rem 0 0;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  aside {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+  }
+
+  .fact-panel {
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-large);
+    background: var(--paper-soft);
+  }
+
+  .fact-panel--warning {
+    border-color: rgb(173 78 39 / 38%);
+  }
+
+  .fact-panel__label {
+    margin: 0 0 1rem;
+    color: var(--coral-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .fact-panel ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding-left: 1.15rem;
+    color: var(--ink-soft);
+  }
+
+  .gallery-section {
+    border-top: 1px solid var(--line);
+    background: var(--paper-soft);
+  }
+
+  .gallery-intro {
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  figure {
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-large);
+    background: var(--paper);
+  }
+
+  figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  figcaption {
+    padding: 1rem 1.2rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 48rem) {
+    .fact-band__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .site-hero__grid {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .site-content {
+      grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    }
+
+    .fact-band__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    aside {
+      position: sticky;
+      top: 2rem;
+    }
+  }
+</style>
