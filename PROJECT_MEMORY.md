@@ -9,14 +9,14 @@ This is the durable history, product logic, and technical memory of the VANIL / 
 
 Every new Codex dialogue must read both files completely before changing the project. Update this document whenever a change affects positioning, architecture, content structure, design decisions, security rules, publishing, or the roadmap.
 
-Last consolidated: 2026-08-01.
+Last consolidated: 2026-08-28.
 
 ## Project identity
 
 - Owner: Ivan Novichkov / Иван Новичков.
 - Visual mark: VANIL.
 - Public identity: VANIL / Иван Новичков.
-- Role: developer of n8n and AI automations.
+- Role: developer of websites and n8n / AI automations.
 - Telegram: https://t.me/novichkov_ivan.
 - Email: ewan.novichkov@yandex.ru.
 - Technical GitHub username: VanilVibecoder.
@@ -29,15 +29,15 @@ VanilVibecoder remains the GitHub username but is not the main service brand. Th
 
 The site is a credibility-first portfolio used in manual outreach, job applications, and sales conversations. It proves that Ivan can analyze a process, design an automation, build it, test it, and document it. It does not claim that simply publishing the site will produce organic leads.
 
-Core positioning:
+Core positioning since the web-development expansion:
 
-> Автоматизирую ручные бизнес-процессы с помощью n8n и AI.
+> Создаю сайты и автоматизирую ручные процессы.
 >
-> Заявки, поддержка, документы, данные и интеграции — от разбора процесса до протестированного workflow с документацией.
+> От структуры и интерфейса сайта до n8n- и AI-workflow: разбираю задачу, собираю решение, проверяю сценарии и фиксирую ограничения.
 
 Primary call to action:
 
-> Опишите повторяющийся процесс — я скажу, что имеет смысл автоматизировать.
+> Опишите задачу — я предложу подход: веб-интерфейс, автоматизацию или их связку.
 
 The positioning is intentionally based on business problems rather than one industry. Service-business cases demonstrate experience but must never be presented as the only market Ivan serves.
 
@@ -50,6 +50,7 @@ The positioning is intentionally based on business problems rather than one indu
 5. Safety before downloads. A workflow is linked only after sanitization, automated scanning, and manual n8n review.
 6. Accessibility is part of completion, not optional polish.
 7. A small maintainable portfolio is preferable to speculative features without demand.
+8. Web projects and automation cases are separate evidence categories and must not share a misleading content status or schema.
 
 ## Chronology
 
@@ -123,19 +124,40 @@ The portfolio catalogue was expanded from four to six verified public cases with
 
 Both source repositories contain public workflow exports, but the portfolio's stricter scanner rejects their top-level `pinData` field even when empty. The case pages therefore link to the repositories and disclose the limitation, but intentionally omit direct workflow-download buttons until the exports are re-sanitized and pass the strict scanner. The repository `telegram-rag-chat-bot-n8n` remains excluded under the existing publication rule; the portfolio repository and `vibecodeCODEX` are not separate n8n case studies.
 
+### 2026-08-28 — websites added as a second service direction
+
+The portfolio expanded from a single automation focus to two explicit service directions: websites / web services and AI / process automation. The homepage keeps the credibility-first structure but now routes visitors to separate evidence catalogues.
+
+The first web project is the independent “Мистер Детейлинг” concept. Its public Vercel site demonstrates a service catalogue, inspection comparison, in-browser preliminary estimate and a prepared Telegram enquiry. Its `/admin` route demonstrates local content, price and section-visibility editing. The work is explicitly labelled as a portfolio demo: it is not an official client delivery, the prices and imagery are demonstrational, and the editor has no shared database or authentication.
+
+Web projects use a separate typed `src/data/sites.ts` data module and `/sites/` routes. This avoids mixing web work into the stricter n8n case schema. Real screenshots of both the public page and editor are stored locally in the portfolio; no private data or credentials are shown.
+
+During the same change, the cases collection moved from Astro's packaged glob loader to a small local Markdown loader in `src/content.config.ts`. The packaged loader caused Vite 8 to evaluate the CommonJS `picomatch` entry as ESM under the repository's Node 24 quality gate (`require is not defined`). The local loader preserves the same Markdown files, Zod validation, rendered case bodies and static routes while avoiding that dependency path.
+
+The completed local publication review passed formatting, lint, Astro check, 3 unit tests, an 11-page production build, 36 Playwright/axe checks across mobile, tablet and desktop, visual inspection at 375, 768 and 1440 px, and the production dependency audit with zero vulnerabilities. No workflow export or download changed, so an additional n8n workflow review was not applicable.
+
 ## User-facing information architecture
 
 ### Homepage: /
 
 The homepage moves from broad positioning to proof and then to contact:
 
-1. Hero: Ivan's role, broad automation promise, and direct CTA.
-2. What can be automated: recurring business problems, not industries.
-3. Selected cases: evidence of practical work.
-4. Process: analysis → architecture → build and tests → documentation and handoff.
-5. Stack and reliability principles.
-6. About Ivan / VANIL.
-7. Telegram-first contact section with email and GitHub alternatives.
+1. Hero: Ivan's web and automation role with a direct CTA.
+2. Two service directions: websites / web services and AI / process automation.
+3. What can be automated: recurring business problems, not industries.
+4. Selected websites and automation cases as separate evidence groups.
+5. Process: analysis → architecture → build and tests → documentation and handoff.
+6. Stack and reliability principles.
+7. About Ivan / VANIL.
+8. Telegram-first contact section with email and GitHub alternatives.
+
+### Website catalogue: /sites/
+
+The catalogue contains typed web projects with an honest demo status, target audience, implemented functions, live URL, screenshots, tested scenarios and limitations.
+
+### Website detail: /sites/[slug]/
+
+Each web-project page explains the task, the user journey, who the interface is for, what is implemented, what was verified and what remains deliberately outside the demo scope.
 
 ### Case catalogue: /cases/
 
@@ -197,10 +219,12 @@ There is no production database or application server. Supabase, PostgreSQL, Qdr
 ### Main modules
 
 - astro.config.mjs sets the canonical production site, static output, sitemap, and Tailwind integration.
-- src/content.config.ts is the source of truth for the case schema.
-- src/content/cases contains one Markdown file per case.
+- src/content.config.ts is the source of truth for the automation-case schema and its local Markdown loader.
+- src/content/cases contains one Markdown file per automation case.
+- src/data/sites.ts contains typed web-project facts and detail-page copy.
 - src/layouts/BaseLayout.astro owns metadata, canonical links, JSON-LD, skip link, header, and footer.
 - src/pages/index.astro owns the homepage sections and hero.
+- src/pages/sites owns the web-project catalogue and detail pages.
 - src/pages/cases/index.astro builds the case catalogue.
 - src/pages/cases/[slug].astro generates one static page per case.
 - src/components contains shared brand, navigation, case card, status, footer, and architecture-map UI.
