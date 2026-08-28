@@ -54,6 +54,13 @@ Russian is the only published locale in v1. The content schema supports a future
 
 The site has zero intentional client JavaScript. Preserve that unless a user-visible behavior cannot be expressed with HTML and CSS.
 
+Web-project inventory:
+
+1. mister-detailing — independent demo concept with a public detailing-studio storefront and local content editor.
+2. boujee-beauty-route — independent demo concept for a beauty studio with a curated service catalogue, three-step Beauty Route, YClients handoff and local content-admin sandbox.
+
+Both projects must remain labelled as unofficial portfolio concepts rather than client production deliveries. Their screenshots are real captures of the supplied public demos; keep the public and admin URLs paired on each detail page.
+
 ## Case inventory
 
 Keep this order and honest status:
@@ -148,13 +155,14 @@ Run from the repository root:
 
 Local development URL: http://127.0.0.1:4321/.
 
-The latest completed review on 2026-07-31 had:
+The latest completed review on 2026-08-28 had:
 
 - Astro check: 0 errors;
 - unit tests: 3/3;
-- Playwright/axe: 27/27 across mobile, tablet, and desktop;
+- static build: 12 pages;
+- Playwright/axe: 42/42 across mobile, tablet, and desktop;
 - production dependency audit: 0 vulnerabilities;
-- GitHub Pages: HTTP 200.
+- local visual review: 375, 768, and 1440 px without horizontal overflow.
 
 Re-run checks after every material change; historical results are not a substitute.
 

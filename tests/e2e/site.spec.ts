@@ -10,6 +10,21 @@ const cases = [
   ['ai-price-list-auditor', 'AI-аудитор прайс-листов', false],
 ] as const;
 
+const sites = [
+  [
+    'mister-detailing',
+    'Сайт-концепт «Мистер Детейлинг»',
+    'https://mister-detailing.vercel.app/',
+    'https://mister-detailing.vercel.app/admin',
+  ],
+  [
+    'boujee-beauty-route',
+    'Сайт-концепт Boujee',
+    'https://deploy-stage-rho.vercel.app/',
+    'https://deploy-stage-rho.vercel.app/admin/demo',
+  ],
+] as const;
+
 test('homepage presents broad positioning, navigation and working contacts', async ({ page }) => {
   await page.goto('/');
 
@@ -39,27 +54,28 @@ test('homepage presents broad positioning, navigation and working contacts', asy
   expect(accessibility.violations).toEqual([]);
 });
 
-test('site catalogue exposes the Mister Detailing demo and both live surfaces', async ({
-  page,
-}) => {
+test('site catalogue exposes both web projects', async ({ page }) => {
   await page.goto('/sites/');
 
-  await expect(page.locator('article.site-card')).toHaveCount(1);
-  await expect(
-    page.getByRole('heading', { name: 'Сайт-концепт «Мистер Детейлинг»' }),
-  ).toBeVisible();
-  await page.getByRole('link', { name: 'Смотреть проект' }).click();
-  await expect(page).toHaveURL(new RegExp('/sites/mister-detailing/$'));
-  await expect(page.getByRole('link', { name: 'Открыть сайт' })).toHaveAttribute(
-    'href',
-    'https://mister-detailing.vercel.app/',
-  );
-  await expect(page.getByRole('link', { name: 'Открыть редактор' })).toHaveAttribute(
-    'href',
-    'https://mister-detailing.vercel.app/admin',
-  );
-  await expect(page.getByText('Ограничения', { exact: true })).toBeVisible();
+  await expect(page.locator('article.site-card')).toHaveCount(2);
+  for (const [, title] of sites) {
+    await expect(page.getByRole('heading', { name: title })).toBeVisible();
+  }
 });
+
+for (const [slug, title, liveUrl, adminUrl] of sites) {
+  test(`site ${slug} exposes both live surfaces and honest limitations`, async ({ page }) => {
+    await page.goto(`/sites/${slug}/`);
+
+    await expect(page.getByRole('heading', { name: title })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Открыть сайт' })).toHaveAttribute('href', liveUrl);
+    await expect(page.getByRole('link', { name: 'Открыть редактор' })).toHaveAttribute(
+      'href',
+      adminUrl,
+    );
+    await expect(page.getByText('Ограничения', { exact: true })).toBeVisible();
+  });
+}
 
 test('case catalogue contains six honest case statuses', async ({ page }) => {
   await page.goto('/cases/');
@@ -97,7 +113,7 @@ test('pages do not overflow horizontally', async ({ page }) => {
   for (const route of [
     '/',
     '/sites/',
-    '/sites/mister-detailing/',
+    ...sites.map(([slug]) => `/sites/${slug}/`),
     '/cases/',
     ...cases.map(([slug]) => `/cases/${slug}/`),
   ]) {

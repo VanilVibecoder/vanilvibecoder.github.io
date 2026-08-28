@@ -136,6 +136,14 @@ During the same change, the cases collection moved from Astro's packaged glob lo
 
 The completed local publication review passed formatting, lint, Astro check, 3 unit tests, an 11-page production build, 36 Playwright/axe checks across mobile, tablet and desktop, visual inspection at 375, 768 and 1440 px, and the production dependency audit with zero vulnerabilities. No workflow export or download changed, so an additional n8n workflow review was not applicable.
 
+### 2026-08-28 — Boujee added as the second web project
+
+The website catalogue now includes the independent Boujee portfolio concept. The public demo presents a curated service catalogue, publicly confirmed team roles, a three-step Beauty Route that recommends one service and two alternatives, and a handoff to YClients for the full catalogue, schedule and booking. The paired `/admin/demo` surface demonstrates local editing for services, team, hidden promotion drafts, media metadata and section visibility.
+
+The case is deliberately described as an unofficial demo rather than a client delivery. It records that the concept imagery does not show real staff, premises or work results; current commercial information remains the responsibility of YClients; and the demo admin does not synchronize changes between devices. Real 1440 px captures of the supplied public and admin URLs are stored with the portfolio project.
+
+The local publication review passed formatting, lint, Astro check with 0 errors, 3 unit tests, a 12-page static build, 42 Playwright/axe checks across mobile, tablet and desktop, visual inspection at 375, 768 and 1440 px, and the production dependency audit with zero vulnerabilities. No workflow export or download changed, so n8n workflow review was not applicable.
+
 ## User-facing information architecture
 
 ### Homepage: /
