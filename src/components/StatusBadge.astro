@@ -7,10 +7,10 @@ const labels: Record<Status, string> = {
   'public-template': 'Публичный шаблон',
 };
 
-const { status } = Astro.props as { status: Status };
+const { status, label } = Astro.props as { status: Status; label?: string };
 ---
 
-<span class:list={['status', `status--${status}`]}>{labels[status]}</span>
+<span class:list={['status', `status--${status}`]}>{label ?? labels[status]}</span>
 
 <style>
   .status {

@@ -34,7 +34,7 @@ const creativeWorkSchema = {
         <a class="back-link" href="/sites/">← Все сайты</a>
         <div class="site-hero__grid">
           <div>
-            <StatusBadge status={data.status} />
+            <StatusBadge status={data.status} label={data.statusLabel} />
             <p class="eyebrow site-hero__eyebrow">{data.eyebrow}</p>
             <h1 class="display">{data.title}</h1>
             <p class="lede">{data.summary}</p>
