@@ -23,7 +23,7 @@ const preview = entry.gallery[0];
   <div class="site-card__body">
     <div class="site-card__meta">
       <span class="site-card__number">{String(index + 1).padStart(2, '0')}</span>
-      <StatusBadge status={data.status} />
+      <StatusBadge status={data.status} label={data.statusLabel} />
     </div>
     <p class="site-card__eyebrow">{data.eyebrow}</p>
     <h2><a href={`/sites/${data.slug}/`}>{data.title}</a></h2>

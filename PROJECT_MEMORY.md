@@ -144,6 +144,10 @@ The case is deliberately described as an unofficial demo rather than a client de
 
 The local publication review passed formatting, lint, Astro check with 0 errors, 3 unit tests, a 12-page static build, 42 Playwright/axe checks across mobile, tablet and desktop, visual inspection at 375, 768 and 1440 px, and the production dependency audit with zero vulnerabilities. No workflow export or download changed, so n8n workflow review was not applicable.
 
+### 2026-08-30 — web-project presentation label refined (PR #9)
+
+The two implemented website cards and their detail-page heroes now use the user-facing label «Реализованный проект» instead of «Демонстрационный MVP». This foregrounds that both interfaces were actually designed, built, tested and deployed. Their typed status remains `demo`, and the case copy and limitations continue to state that they are independent unofficial portfolio concepts rather than client production deliveries. Automation-case status labels are unchanged. During the required release audit, the compatible transitive `nanoid` dependency was refreshed from 3.3.16 to 3.3.18 in `package-lock.json` to resolve GHSA-2v37-7h3g-55p8; no direct dependency or runtime architecture changed.
+
 ## User-facing information architecture
 
 ### Homepage: /
@@ -161,7 +165,7 @@ The homepage moves from broad positioning to proof and then to contact:
 
 ### Website catalogue: /sites/
 
-The catalogue contains typed web projects with an honest demo status, target audience, implemented functions, live URL, screenshots, tested scenarios and limitations.
+The catalogue presents completed implementations with the label «Реализованный проект» and contains their typed demo status, target audience, implemented functions, live URL, screenshots, tested scenarios and explicit independent-project limitations.
 
 ### Website detail: /sites/[slug]/
 

@@ -5,6 +5,7 @@ export interface SiteProject {
   eyebrow: string;
   summary: string;
   status: 'demo';
+  statusLabel: 'Реализованный проект';
   featured: boolean;
   order: number;
   stack: string[];
@@ -28,6 +29,7 @@ export const sites: SiteProject[] = [
     summary:
       'Демонстрационный сайт детейлинг-студии помогает выбрать услуги, получить предварительный диапазон стоимости и подготовить обращение в Telegram.',
     status: 'demo',
+    statusLabel: 'Реализованный проект',
     featured: true,
     order: 1,
     stack: ['Next.js', 'TypeScript', 'React', 'Vercel'],
@@ -103,6 +105,7 @@ export const sites: SiteProject[] = [
     summary:
       'Независимый концепт сайта студии красоты: помогает начать с желаемого результата, подобрать услугу за три шага и перейти к записи в YClients.',
     status: 'demo',
+    statusLabel: 'Реализованный проект',
     featured: true,
     order: 2,
     stack: ['Next.js', 'React', 'Vercel', 'YClients'],

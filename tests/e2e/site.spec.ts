@@ -58,6 +58,7 @@ test('site catalogue exposes both web projects', async ({ page }) => {
   await page.goto('/sites/');
 
   await expect(page.locator('article.site-card')).toHaveCount(2);
+  await expect(page.getByText('Реализованный проект', { exact: true })).toHaveCount(2);
   for (const [, title] of sites) {
     await expect(page.getByRole('heading', { name: title })).toBeVisible();
   }
@@ -68,6 +69,7 @@ for (const [slug, title, liveUrl, adminUrl] of sites) {
     await page.goto(`/sites/${slug}/`);
 
     await expect(page.getByRole('heading', { name: title })).toBeVisible();
+    await expect(page.getByText('Реализованный проект', { exact: true })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Открыть сайт' })).toHaveAttribute('href', liveUrl);
     await expect(page.getByRole('link', { name: 'Открыть редактор' })).toHaveAttribute(
       'href',
