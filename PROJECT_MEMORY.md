@@ -148,7 +148,7 @@ The local publication review passed formatting, lint, Astro check with 0 errors,
 
 The two implemented website cards and their detail-page heroes now use the user-facing label «Реализованный проект» instead of «Демонстрационный MVP». This foregrounds that both interfaces were actually designed, built, tested and deployed. Their typed status remains `demo`, and the case copy and limitations continue to state that they are independent unofficial portfolio concepts rather than client production deliveries. Automation-case status labels are unchanged. During the required release audit, the compatible transitive `nanoid` dependency was refreshed from 3.3.16 to 3.3.18 in `package-lock.json` to resolve GHSA-2v37-7h3g-55p8; no direct dependency or runtime architecture changed.
 
-### 2026-08-30 — web-project status clarified
+### 2026-08-30 — web-project status clarified (PR #10)
 
 After a client-presentation review, the web-project label was refined from «Реализованный проект» to «Реализованный демо-проект». The new wording communicates both relevant facts in one place: each website was designed, built, tested and deployed, while remaining an independent portfolio demonstration rather than a client order. The limitations on both website pages now repeat the same distinction in direct language. The typed `demo` status and the automation-case labels remain unchanged.
 
